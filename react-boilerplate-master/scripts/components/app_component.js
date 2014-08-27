@@ -8,11 +8,11 @@ module.exports = React.createClass({
   },
 
   setAttributes: function (attributes) {
-    this.props.player.setAttributes(this.state.attributes);
+    this.props.player.setAttributes(attributes);
   },
 
   setLearnerState: function (learnerState) {
-    this.props.player.setLearnerState(this.state.learnerState);
+    this.props.player.setLearnerState(learnerState);
   },
 
   onAttributesChanged: function (attributes) {
@@ -38,7 +38,22 @@ module.exports = React.createClass({
     this.props.player.on('editableChanged', this.onEditableChanged.bind(this));
   },
 
-  render: function() {
+  isAuthor: function() {
     return <div>{this.state.editable ? "author" : "learn"}</div>;
+  },
+
+  editMe: function(event) {
+    this.setAttributes({
+      txt: event.target.value
+    })
+  },
+
+  editableTextarea: function() {
+    var attributes = this.state.attributes || {};
+    return <textarea onChange={this.editMe} value={attributes.txt}/>
+  },
+
+  render: function() {
+    return <div>{this.isAuthor()}{this.editableTextarea()}</div>;
   }
 })
