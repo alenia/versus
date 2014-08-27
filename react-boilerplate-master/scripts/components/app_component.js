@@ -4,7 +4,14 @@ var React = require('react');
 module.exports = React.createClass({
 
   getInitialState: function() {
-    return {editable: false};
+    return {
+      editable: false,
+      data: {
+        f1: "f1",
+        f2: "f2"
+      }
+
+    };
   },
 
   setAttributes: function (attributes) {
@@ -43,7 +50,7 @@ module.exports = React.createClass({
   },
 
   setText: function(wot, event) {
-    console.log("SET")
+    console.log("SET", wot, event)
     var data;
     if (this.state.attributes && this.state.attributes.data) {
       data = this.state.attributes.data;
@@ -61,7 +68,7 @@ module.exports = React.createClass({
 
   getText: function(idx) {
     // debugger;
-    console.log("GET")
+    console.log("GET", idx)
     console.log(this.state.attributes, "getText");
     if (this.state.attributes && this.state.attributes.data) {
       res = this.state.attributes.data[idx];
