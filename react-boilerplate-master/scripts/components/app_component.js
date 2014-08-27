@@ -40,16 +40,16 @@ module.exports = React.createClass({
     this.props.challengesApi = new VersalChallengesAPI( function() {
       console.log("created challengesApi")
     })
-
   },
 
-  editMe: function(wot, event) {
+  setText: function(wot, event) {
+    console.log("SET")
     var data;
     if (this.state.attributes && this.state.attributes.data) {
-      data = this.state.attributes.data;  
+      data = this.state.attributes.data;
     } else {
-      console.log("initData");
-      data = {};
+      console.log("no Data");
+      return;
     }
 
     data[wot] = event.target.value;
@@ -61,12 +61,13 @@ module.exports = React.createClass({
 
   getText: function(idx) {
     // debugger;
+    console.log("GET")
+    console.log(this.state.attributes, "getText");
     if (this.state.attributes && this.state.attributes.data) {
       res = this.state.attributes.data[idx];
     } else {
-      return "----"
-    }
-   
+      return;
+    }   
   },
 
   setChallenges: function(answer) {
@@ -82,24 +83,23 @@ module.exports = React.createClass({
 
   render: function() {
     // this.state.txt = "edit me";
-
     // if {this.state.editable}
     //   return <div>"editing"</div>
     // else
-      return <div>
-        <div>
-          {this.state.editable ? "edit" : "play"}
-        </div>
-        <textarea 
-          onChange={this.editMe.bind(this, "f1")} 
-          value={ this.getText("f1") }
-        />
-        <textarea 
-          onChange={this.editMe.bind(this, "f2")}
-          value={ this.getText("f2") }
-        />
-
+    return <div>
+      <div>
+        {this.state.editable ? "edit" : "play"}
+      </div>
+      <textarea 
+        onChange={this.setText.bind(this, "f1")}
+        value={ this.getText("f1") }
+      />
+      <textarea 
+        onChange={this.setText.bind(this, "f2")}
+        value={ this.getText("f2") }
+      />
+      <hr size='2' />
     </div>
-
   }
+
 })

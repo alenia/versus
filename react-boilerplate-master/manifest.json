@@ -6,5 +6,7 @@
   "author": "versal",
   "launcher": "iframe",
   "defaultConfig": {},
-  "defaultUserState": {}
+  "defaultUserState": {
+    "data": {}
+  }
 }
