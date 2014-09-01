@@ -1,6 +1,9 @@
 /** @jsx React.DOM */
 var React = require('react');
 
+var EditComponent = require('./edit_component');
+var LearnComponent = require('./learn_component');
+
 module.exports = React.createClass({
 
   getInitialState: function() {
@@ -38,22 +41,13 @@ module.exports = React.createClass({
     this.props.player.on('editableChanged', this.onEditableChanged.bind(this));
   },
 
-  isAuthor: function() {
-    return <div>{this.state.editable ? "author" : "learn"}</div>;
-  },
-
-  editMe: function(event) {
-    this.setAttributes({
-      txt: event.target.value
-    })
-  },
-
-  editableTextarea: function() {
-    var attributes = this.state.attributes || {};
-    return <textarea onChange={this.editMe} value={attributes.txt}/>
-  },
-
   render: function() {
-    return <div>{this.isAuthor()}{this.editableTextarea()}</div>;
+    if(this.state.editable) {
+      return <EditComponent player={this.player} attributes={this.state.attributes} setAttributes={this.setAttributes}/>
+    } else {
+      return <LearnComponent
+        player={this.player}
+        attributes={this.state.attributes} learnerState={this.state.learnerState} setLearnerState={this.setLearnerState}/>
+    }
   }
 })
